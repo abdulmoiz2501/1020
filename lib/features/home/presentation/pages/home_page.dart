@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../watch/presentation/pages/watch_page.dart';
+import '../../../movie/presentation/pages/watch_page.dart';
 import '../widgets/custom_nav_bar.dart';
 
 
