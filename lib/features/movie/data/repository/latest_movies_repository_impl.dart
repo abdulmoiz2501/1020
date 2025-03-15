@@ -24,4 +24,9 @@ class LatestMoviesRepositoryImpl implements LatestMovieRepository {
   Future<MovieDetailsModel> getMovieDetails(String movieId) {
     return remoteDataSource.getMovieDetails(movieId);
   }
+  @override
+  Future<UpcomingMoviesModel> getDiscoverMovies() {
+    return remoteDataSource.getDiscoverMovies();
+  }
+
 }

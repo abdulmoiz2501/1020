@@ -1,3 +1,5 @@
 const String TMDB_BASE_URL = "https://api.themoviedb.org/3/";
 const String TMDB_API_KEY = "28cfc23bff3439dab6511fff140e2f43";
 const String TMDB_READ_ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyOGNmYzIzYmZmMzQzOWRhYjY1MTFmZmYxNDBlMmY0MyIsIm5iZiI6MTc0MjAyODY4Mi44MDgsInN1YiI6IjY3ZDUzZjhhMDUyNWYzZDc0ZjAxMjQxMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.LELUZ_beF94r_LXOnVrcppqSY9Qhd2rUKHJvC4Tbgjc";
+
+

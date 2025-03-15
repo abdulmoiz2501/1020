@@ -6,4 +6,8 @@ abstract class LatestMoviesRemoteDataSource {
   Future<UpcomingMoviesModel> getUpcomingMovies();
   Future<GenreModel> getGenre();
   Future<MovieDetailsModel> getMovieDetails(String movieId);
+
+
+  Future<UpcomingMoviesModel> getDiscoverMovies();
+
 }
