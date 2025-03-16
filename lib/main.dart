@@ -10,6 +10,11 @@ import 'features/movie/data/repository/latest_movies_repository_impl.dart';
 import 'features/movie/data/source/latest_movies_remote_source_impl.dart';
 import 'features/movie/domain/usecase/discover_movies/discover_movies_usecase.dart';
 import 'features/movie/presentation/cubit/discover_movies/discover_movies_cubit.dart';
+import 'features/movie/presentation/cubit/watch_ui/watch_ui_cubit.dart';
+import 'features/search/data/repository/search_movies_repository_impl.dart';
+import 'features/search/data/source/search_movies_data_source_impl.dart';
+import 'features/search/domain/usecase/search_movies_usecase.dart';
+import 'features/search/presentation/cubit/search_movies_cubit.dart';
 
 
 
@@ -28,29 +33,40 @@ class MyApp extends StatelessWidget {
     final latestMovieRepository = LatestMoviesRepositoryImpl(remoteDataSource: latestMoviesRemoteDataSource,);
     final discoverMoviesUseCase = DiscoverMoviesUseCase(repository: latestMovieRepository,);
     final discoverMoviesCubit = DiscoverMoviesCubit(discoverMoviesUseCase: discoverMoviesUseCase,)..fetchDiscoverMovies();
+    final searchMoviesRemoteDataSource = SearchMoviesRemoteDataSourceImpl(httpClient: dio);
+    final searchMoviesRepository = SearchMoviesRepositoryImpl(remoteDataSource: searchMoviesRemoteDataSource,);
+    final searchMoviesUseCase = SearchMoviesUseCase(repository: searchMoviesRepository,);
+
 
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
       builder: (context, child) {
         return MultiBlocProvider(
-            providers: [
+          providers: [
             BlocProvider<DiscoverMoviesCubit>(
-            create: (_) => discoverMoviesCubit,
-        ),
-
-        ],
-
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            useMaterial3: true,
-            textTheme: GoogleFonts.poppinsTextTheme(
-              Theme.of(context).textTheme,
+              create: (_) => discoverMoviesCubit,
             ),
+            BlocProvider<WatchUiCubit>(
+              create: (_) => WatchUiCubit(),
+            ),
+            BlocProvider<SearchMoviesCubit>(
+              create: (_) => SearchMoviesCubit(
+                searchMoviesUseCase: searchMoviesUseCase,
+              ),
+            ),
+          ],
+
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              useMaterial3: true,
+              textTheme: GoogleFonts.poppinsTextTheme(
+                Theme.of(context).textTheme,
+              ),
+            ),
+            home: const HomePage(),
           ),
-          home: const HomePage(),
-        ),
         );
       },
     );

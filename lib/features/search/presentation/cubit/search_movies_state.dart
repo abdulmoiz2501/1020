@@ -1,5 +1,6 @@
-
 import 'package:equatable/equatable.dart';
+
+import '../../data/models/search_movies_model.dart';
 
 abstract class SearchMoviesState extends Equatable {
   const SearchMoviesState();
@@ -13,11 +14,18 @@ class SearchMoviesInitial extends SearchMoviesState {}
 class SearchMoviesLoading extends SearchMoviesState {}
 
 class SearchMoviesLoaded extends SearchMoviesState {
-  // final SearchResult result;
+  final SearchMoviesModel searchMoviesModel;
 
+  const SearchMoviesLoaded({required this.searchMoviesModel});
+
+  @override
+  List<Object?> get props => [searchMoviesModel];
 }
 
 class SearchMoviesFailure extends SearchMoviesState {
-  // final String message;
+  final String errorMessage;
+  const SearchMoviesFailure({required this.errorMessage});
 
+  @override
+  List<Object?> get props => [errorMessage];
 }
