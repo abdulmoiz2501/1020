@@ -2,12 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 import 'package:tentwenty/core/theme/app_assets.dart';
 import '../../../../core/helpers/helper_functions.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../genre/presentation/cubit/get_genre_cubit.dart';
 import '../../../genre/presentation/cubit/get_genre_state.dart';
+import '../../../ticket/presentation/pages/seat_selection_page.dart';
 import '../../../video_feature/presentation/cubit/video_cubit.dart';
 import '../../../video_feature/presentation/cubit/video_state.dart';
 import '../../../video_feature/presentation/pages/youtube_video_page.dart';
@@ -119,11 +119,21 @@ class MovieDetailsPage extends StatelessWidget {
                               CustomButton(
                                 text: "Get Tickets",
                                 onPressed: () {
-                                  print("Get Tickets clicked!");
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => SeatSelectionPage(
+                                        movieTitle: "The King's Man",
+                                        releaseDate: formatDate(movie.releaseDate),
+                                      ),
+                                    ),
+                                  );
                                 },
                                 buttonColor: AppColors.blueColor,
                                 textColor: AppColors.primaryWhite,
                               ),
+
+
 
                               SizedBox(height: 10.h),
                               CustomButton(
@@ -153,7 +163,7 @@ class MovieDetailsPage extends StatelessWidget {
                                     );
                                   }
                                 },
-                                child: Container(), // Required for `BlocListener`
+                                child: Container(),
                               ),
 
 
