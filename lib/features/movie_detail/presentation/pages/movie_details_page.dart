@@ -8,6 +8,9 @@ import '../../../../core/helpers/helper_functions.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../genre/presentation/cubit/get_genre_cubit.dart';
 import '../../../genre/presentation/cubit/get_genre_state.dart';
+import '../../../video_feature/presentation/cubit/video_cubit.dart';
+import '../../../video_feature/presentation/cubit/video_state.dart';
+import '../../../video_feature/presentation/pages/youtube_video_page.dart';
 import '../../data/repository/movie_details_repository_impl.dart';
 import '../../data/source/movie_details_source_impl.dart';
 import '../../domain/usecase/get_movie_details_usecase.dart';
@@ -126,12 +129,33 @@ class MovieDetailsPage extends StatelessWidget {
                               CustomButton(
                                 text: "Watch Trailer",
                                 onPressed: () {
-                                  print("Watch Trailer clicked!");
+                                  final videoCubit = context.read<VideoCubit>();
+                                  videoCubit.fetchVideos(movieId);
                                 },
                                 borderColor: AppColors.blueColor,
                                 textColor: AppColors.primaryWhite,
                                 assetIcon: AppAssets.playIcon,
-                              )
+                              ),
+
+                              BlocListener<VideoCubit, VideoState>(
+                                listener: (context, state) {
+                                  if (state is VideoLoaded) {
+                                    final videoData = state.videos.first;
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => YoutubeVideoPage(video: videoData),
+                                      ),
+                                    );
+                                  } else if (state is VideoError) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text(state.message)),
+                                    );
+                                  }
+                                },
+                                child: Container(), // Required for `BlocListener`
+                              ),
+
 
                             ],
                           ),

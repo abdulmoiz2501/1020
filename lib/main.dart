@@ -20,6 +20,10 @@ import 'features/search/data/source/search_movies_data_source_impl.dart';
 import 'features/search/domain/usecase/search_movies_usecase.dart';
 import 'features/search/presentation/cubit/search_movies_cubit.dart';
 import 'features/search/presentation/cubit/search_ui_cubit.dart';
+import 'features/video_feature/data/repository/video_repository_impl.dart';
+import 'features/video_feature/data/source/video_source_impl.dart';
+import 'features/video_feature/domain/usecase/get_video_usecase.dart';
+import 'features/video_feature/presentation/cubit/video_cubit.dart';
 
 
 
@@ -72,6 +76,16 @@ class MyApp extends StatelessWidget {
             BlocProvider<SearchUiCubit>(
               create: (_) => SearchUiCubit(),
             ),
+            BlocProvider<VideoCubit>(
+              create: (_) => VideoCubit(
+                getVideoUseCase: GetVideoUseCase(
+                  repository: VideoRepositoryImpl(
+                    remoteSource: VideoRemoteSourceImpl(dio: dio),
+                  ),
+                ),
+              ),
+            ),
+
           ],
 
           child: MaterialApp(
