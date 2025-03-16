@@ -6,4 +6,5 @@ class WatchUiCubit extends Cubit<int> {
 
   void searchClick() => emit(1);
   void searchClose() => emit(0);
+  void searchSubmitted() => emit(2);
 }

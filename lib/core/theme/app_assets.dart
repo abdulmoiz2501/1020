@@ -5,4 +5,5 @@ class AppAssets {
   static const String watchIcon = '$iconsPath/watchIcon.png';
   static const String mediaLibraryIcon = '$iconsPath/mediaLibraryIcon.png';
   static const String moreIcon = '$iconsPath/moreIcon.png';
+  static const String playIcon = '$iconsPath/playIcon.png';
 }
